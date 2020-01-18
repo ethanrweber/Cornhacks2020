@@ -3,3 +3,7 @@
 ################################################################################
 
 /CornhacksProject/.vs/CornhacksProject/v16/Server/sqlite3
+.ide
+.suo
+.dll
+.pdb

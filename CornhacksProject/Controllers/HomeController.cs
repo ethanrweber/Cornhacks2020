@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using CornhacksProject.Models;
+using Newtonsoft.Json;
 
 namespace CornhacksProject.Controllers
 {
@@ -42,6 +43,7 @@ namespace CornhacksProject.Controllers
             {
                 string addy = $"https://api.airvisual.com/v2/city?{city}{state}{country}&key={Constants.airVisualApiKey}";
                 var response = client.GetStringAsync(new Uri(addy)).Result;
+                var x = JsonConvert.DeserializeObject<AirVisualResult>(response);
                 return response;
             }
         }

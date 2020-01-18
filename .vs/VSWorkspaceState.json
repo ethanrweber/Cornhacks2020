@@ -1,6 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CornhacksProject",
+    "\\CornhacksProject\\App_Data",
+    "\\CornhacksProject\\bin",
+    "\\CornhacksProject\\bin\\roslyn",
+    "\\CornhacksProject\\obj",
+    "\\CornhacksProject\\obj\\Debug"
   ],
+  "SelectedNode": "\\CornhacksProject",
   "PreviewInSolutionExplorer": false
 }

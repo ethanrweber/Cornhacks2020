@@ -1,0 +1,43 @@
+﻿@using CornhacksProject.Models
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1></h1>
+    <p class="lead"></p>
+    <p></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4 center-block" >
+        <h2>Map</h2>
+        <div id="map"  style="display: block;"></div>
+    </div>
+</div>
+
+@section scripts
+{
+    @* google maps script *@
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=@(Constants.googleMapsApiKey)&callback=initMap"
+            type="text/javascript">
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            initMap();
+
+            function initMap() {
+                var uluru = { lat: -25.344, lng: 131.036 };
+                var map = new google.maps.Map(
+                    document.getElementById('map'),
+                    { zoom: 4, center: uluru }
+                );
+                var marker = new google.maps.Marker({ position: uluru, map: map });
+            }
+        });
+
+    </script>
+}

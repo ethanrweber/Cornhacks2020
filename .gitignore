@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+/CornhacksProject/bin
+/CornhacksProject/obj
+/CornhacksProject/.vs/CornhacksProject/v16/Server/sqlite3
+.ide
+.suo
+.dll
+.pdb
+.lock
+.exe

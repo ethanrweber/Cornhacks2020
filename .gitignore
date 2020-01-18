@@ -10,3 +10,7 @@
 .pdb
 .lock
 .exe
+.sqlite
+.xml
+.ide-wal
+.ide-shm

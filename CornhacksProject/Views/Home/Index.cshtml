@@ -10,46 +10,78 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4" >
+    <div class="col-md-4">
         <h2>Map</h2>
-        <input type="search" id="searchBox" placeholder="Search for a city" class="form-control"/>
-        <br/>
-        <div id="map"  style="display: block;"></div>
+        <input type="search" id="searchBox" placeholder="Search for a city" class="form-control" />
+        <br />
+        <div id="map" style="display: block;"></div>
     </div>
 </div>
 
 @section scripts
 {
     @* google maps script *@
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=@(Constants.googleMapsApiKey)&callback=initMap"
-            type="text/javascript">
-    </script>
-    <script type="text/javascript">
+    <script src="https://maps.googleapis.com/maps/api/js?key=@(Constants.googleMapsApiKey)&libraries=places"
+            type="text/javascript"></script>
 
+    <script type="text/javascript">
         // script that runs when the page finishes loading
         $(document).ready(function () {
             // defer execution slightly to finish getting map api js
-            setTimeout(initMap(), 300);
-
-            $('#searchBox').submit(function(event) {
-                event.preventDefault();
-                var requrest = {
-                    query: $('#searchBox').val(),
-                    fields: ['name']
-                }
-                google.maps.places.
-            });
+            setTimeout(makeMap(), 250);
         });
 
-        function initMap() {
-            var birthplace = { lat: 40.816303, lng: -96.702351 };
+        var glbMap;
+        var bounds = new google.maps.LatLngBounds();
+
+        // initialize map on screen with cornhacks location!
+        function makeMap() {
+            var birthplace = new google.maps.LatLng(40.816303, -96.702351 );
             var map = new google.maps.Map(
                 document.getElementById('map'),
                 { zoom: 18, center: birthplace }
             );
-            var marker = new google.maps.Marker({ position: birthplace, map: map });
+            var marker = new google.maps.Marker({
+                position: birthplace,
+                map: map,
+                title: 'Cornhacks 2020 location!'
+            });
+            glbMap = map;
+            bounds.extend(birthplace);
         }
+
+        // event handler for search submit
+        $('#searchBox').on('change', function (event) {
+            // build request for maps api
+            var request = {
+                query: $('#searchBox').val(),
+                fields: ['name', 'geometry']
+            };
+
+            // init maps service for our map object
+            var service = new google.maps.places.PlacesService(glbMap);
+
+            // find location from query, add marker, change map size
+            service.findPlaceFromQuery(request, function (results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    if (results.length > 0) {
+                        for (var i = 0; i < results.length; i++) {
+                            var latLngArr = results[i].geometry.location;
+                            var latLng = new google.maps.LatLng(latLngArr.lat(), latLngArr.lng());
+                            var marker = new google.maps.Marker({
+                                position: latLng,
+                                map: glbMap,
+                                title: request.query
+                            });
+                            bounds.extend(latLng);
+                        }
+                        glbMap.fitBounds(bounds);
+                    } else {
+                        alert('search returned no results');
+                    }
+                }
+            });
+        });
 
     </script>
 }

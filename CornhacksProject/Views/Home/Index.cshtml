@@ -32,11 +32,14 @@
             // defer execution slightly to finish getting map api js
             setTimeout(initMap(), 300);
 
-            //$('#searchBox').submit(function(event) {
-            //    event.preventDefault();
-            //    query = 
-            //    google.maps.places.
-            //});
+            $('#searchBox').submit(function(event) {
+                event.preventDefault();
+                var requrest = {
+                    query: $('#searchBox').val(),
+                    fields: ['name']
+                }
+                google.maps.places.
+            });
         });
 
         function initMap() {

@@ -26,6 +26,11 @@ namespace CornhacksProject.Controllers
             return View();
         }
 
+        public ActionResult References()
+        {
+            return View();
+        }
+
         public async Task<string> GetAirVisualResultAsync(string city, string state, string country)
         {
             //testing

@@ -146,3 +146,4 @@ C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/obj/Debug/Cornh
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/obj/Debug/CornhacksProject.csproj.CopyComplete
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/obj/Debug/CornhacksProject.dll
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/obj/Debug/CornhacksProject.pdb
+/Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/obj/Debug/CornhacksProject.csprojAssemblyReference.cache

@@ -21,7 +21,7 @@ namespace CornhacksProject.Controllers
         {
             ViewBag.Message = "Your application description page.";
             var x = GetOpenChargeResultAsync(0, 0).Result;
-            
+            int i = GetNumEVStations(x, "Lincoln");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace CornhacksProject.Controllers
             }
         }
 
-        public async Task<List<OpenChargeResult>> GetOpenChargeResultAsync(double latitude, double longitude, double distance = 10, string distanceUnit = "Miles", int maxResults = 2)
+        public async Task<List<OpenChargeResult>> GetOpenChargeResultAsync(double latitude, double longitude, double distance = 20, string distanceUnit = "Miles")
         {
             //testing
             latitude = 40.8136;
@@ -57,12 +57,26 @@ namespace CornhacksProject.Controllers
 
             using (var client = new HttpClient())
             {
-                string addy = $"https://api.openchargemap.io/v3/poi/?output=json&compact=true&verbose=false&countrycode=US&maxresults={maxResults}&latitude={latitude}&longitude={longitude}&distance={distance}&distanceunit={distanceUnit}";
+                string addy = $"https://api.openchargemap.io/v3/poi/?output=json&compact=true&verbose=false&countrycode=US&latitude={latitude}&longitude={longitude}&distance={distance}&distanceunit={distanceUnit}";
                 var response = client.GetStringAsync(new Uri(addy)).Result;
                 var x = JsonConvert.DeserializeObject<List<OpenChargeResult>>(response);
                 
                 return x;
             }
+        }
+
+        public int GetNumEVStations(List<OpenChargeResult> list, string city)
+        {
+            int numStations = 0;
+            foreach (var v in list)
+            {
+                if (v.AddressInfo.Town == city)
+                {
+                    numStations++;
+                }
+            }
+
+            return numStations;
         }
     }
 }

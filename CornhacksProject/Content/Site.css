@@ -24,6 +24,7 @@ textarea {
 }
 
 #map {
-    width: 1140px;
+    width: auto;
+    max-width: 950px;
     height: 500px;
 }

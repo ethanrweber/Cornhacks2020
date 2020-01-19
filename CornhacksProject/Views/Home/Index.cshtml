@@ -3,18 +3,18 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1></h1>
-    <p class="lead"></p>
-    <p></p>
-</div>
-
 <div class="row">
-    <div class="col-md-4">
-        <h2>Map</h2>
-        <input type="search" id="searchBox" placeholder="Search for a city" class="form-control" />
-        <br />
-        <div id="map" style="display: block;"></div>
+    <br/>
+    <input type="search" id="searchBox" placeholder="Search for a city" class="form-control" style="margin-left: 15px;"/>
+    <br/>
+    <div class="col-md-10">
+        <div id="map"></div>
+    </div>
+    <div class="col-md-2">
+        <h4>Searched Locations</h4>
+        <ul id="previousLocations">
+
+        </ul>
     </div>
 </div>
 
@@ -29,6 +29,10 @@
         $(document).ready(function () {
             // defer execution slightly to finish getting map api js
             setTimeout(makeMap(), 250);
+
+            toastr.options = {
+                "positionClass": "toast-top-center"
+            };
         });
 
         var glbMap;
@@ -55,32 +59,86 @@
             // build request for maps api
             var request = {
                 query: $('#searchBox').val(),
-                fields: ['name', 'geometry']
+                fields: ['name', 'geometry', 'formatted_address']
             };
 
-            // init maps service for our map object
-            var service = new google.maps.places.PlacesService(glbMap);
+            // check for blank string
+            if (/\S/.test(request.query) && request.query !== null) {
 
-            // find location from query, add marker, change map size
-            service.findPlaceFromQuery(request, function (results, status) {
-                if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    if (results.length > 0) {
-                        for (var i = 0; i < results.length; i++) {
+                // init maps service for our map object
+                var service = new google.maps.places.PlacesService(glbMap);
+
+                // find location from query, add marker, change map size, update location list
+                service.findPlaceFromQuery(request, function (results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
+                        for (let i = 0; i < results.length; i++) {
                             var latLngArr = results[i].geometry.location;
                             var latLng = new google.maps.LatLng(latLngArr.lat(), latLngArr.lng());
+
+                            // formatted address: we expect city, state, country (usa)
+                            // possibilities include state, country, 
+                            var city_state = results[i].formatted_address.split(',');
+                            var city, state;
+                            if (city_state.length < 3) {
+                                toastr['error']('Invalid search term: result does not include a city', 'Error');
+                                return;
+                            } else if (city_state.length == 3) {
+                                city = city_state[0];
+                                state = city_state[1];
+                            } else {
+                                city = city_state[1];
+                                state = city_state[2];
+                            }
+                            city = city.trim();
+                            state = state.trim();
+                            // check state for numbers (sometimes returns ex: "NE 68516  " instead of simply "NE")
+                            if (/\d/.test(state)) {
+                                // replace digits and whitespace with empty char
+                                state = state.replace(/[0-9]/g, '').replace(/\s/g,'');
+                            }
+                            console.log('city: "' + city + '" state: "' + state + '"');
+                            // ajax call to get sustainability score
+                            toastr['info']('loading');
+                            $.ajax({
+                                type: 'GET',
+                                url: '@Html.Raw(Url.Action("SustainabilityScore", "Home"))',
+                                data: {
+                                    city: city,
+                                    state: state
+                                },
+                                cache: false
+                            }).done(function (score, local_status) {
+                                toastr.clear();
+                                if (local_status === 'success') {
+                                    var span;
+                                    if (score > 7) {
+                                        span = ' <span class="glyphicon glyphicon-ok-circle" style="color: green;">' + score + '</span>';
+                                    } else if (score > 4) {
+                                        span = ' <span class="glyphicon glyphicon-ok-sign" style="color: lightblue;">' + score + '</span>';
+                                    } else {
+                                        span = ' <span class="glyphicon glyphicon-ban-circle" style="color: red;">' + score + '</span>';
+                                    }
+
+                                    $('#previousLocations').append('<li>' + results[i].name + span + '</li>');
+                                } else {
+                                    toastr['error']('An unknown error occurred :(', 'Error');
+                                }
+                            });
+                            
                             var marker = new google.maps.Marker({
                                 position: latLng,
                                 map: glbMap,
-                                title: request.query
+                                title: results[i].name
                             });
                             bounds.extend(latLng);
+
                         }
                         glbMap.fitBounds(bounds);
                     } else {
-                        alert('search returned no results');
+                        toastr['error']('Search returned no results', 'Error');
                     }
-                }
-            });
+                });
+            }
         });
 
     </script>

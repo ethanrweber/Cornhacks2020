@@ -1,14 +1,3 @@
-C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll
-C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/bin/roslyn/Microsoft.CodeAnalysis.dll
-C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll
-C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll
-C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/bin/roslyn/System.Collections.Immutable.dll
-C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/bin/roslyn/System.IO.FileSystem.dll
-C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/bin/roslyn/System.IO.FileSystem.Primitives.dll
-C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/bin/roslyn/System.Reflection.Metadata.dll
-C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/bin/roslyn/System.Security.Cryptography.Primitives.dll
-C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/bin/roslyn/System.ValueTuple.dll
-C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/bin/roslyn/VBCSCompiler.exe
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/bin/CornhacksProject.dll
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/bin/CornhacksProject.pdb
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/bin/roslyn/csc.exe
@@ -232,3 +221,4 @@ C:\Users\jonah\Desktop\UNL\CornHacks\Cornhacks2\CornhacksProject\obj\Debug\Cornh
 C:\Users\jonah\Desktop\UNL\CornHacks\Cornhacks2\CornhacksProject\obj\Debug\CornhacksProject.csproj.CopyComplete
 C:\Users\jonah\Desktop\UNL\CornHacks\Cornhacks2\CornhacksProject\obj\Debug\CornhacksProject.dll
 C:\Users\jonah\Desktop\UNL\CornHacks\Cornhacks2\CornhacksProject\obj\Debug\CornhacksProject.pdb
+C:\Users\Ethan Weber\Source\Repos\Cornhacks2020\CornhacksProject\obj\Debug\CornhacksProject.csprojAssemblyReference.cache

@@ -18,6 +18,17 @@
     </div>
 </div>
 
+<hr/>
+
+<div class="row" style="font-size: 1.2em;">
+    <h6>Legend</h6>
+    <ul>
+        <li><span class="glyphicon glyphicon-ok-circle" style="color: green;">&nbsp;## - Above Average</span></li>
+        <li><span class="glyphicon glyphicon-ok-sign" style="color: #369CEF;">&nbsp;## - Average</span></li>
+        <li><span class="glyphicon glyphicon-ban-circle" style="color: red;">&nbsp;## - Below Average</span></li>
+    </ul>
+</div>
+
 @section scripts
 {
     @* google maps script *@
@@ -98,7 +109,7 @@
                             }
                             console.log('city: "' + city + '" state: "' + state + '"');
                             // ajax call to get sustainability score
-                            toastr['info']('loading');
+                            toastr['info']('loading data...', '', {timeOut: 10000});
                             $.ajax({
                                 type: 'GET',
                                 url: '@Html.Raw(Url.Action("SustainabilityScore", "Home"))',
@@ -112,11 +123,11 @@
                                 if (local_status === 'success') {
                                     var span;
                                     if (score > 7) {
-                                        span = ' <span class="glyphicon glyphicon-ok-circle" style="color: green;">' + score + '</span>';
+                                        span = ' <span class="glyphicon glyphicon-ok-circle" style="color: green;">&nbsp;' + score + '</span>';
                                     } else if (score > 4) {
-                                        span = ' <span class="glyphicon glyphicon-ok-sign" style="color: lightblue;">' + score + '</span>';
+                                        span = ' <span class="glyphicon glyphicon-ok-sign" style="color: #369CEF;">&nbsp;' + score + '</span>'; // light blue
                                     } else {
-                                        span = ' <span class="glyphicon glyphicon-ban-circle" style="color: red;">' + score + '</span>';
+                                        span = ' <span class="glyphicon glyphicon-ban-circle" style="color: red;">&nbsp;' + score + '</span>';
                                     }
 
                                     $('#previousLocations').append('<li>' + results[i].name + span + '</li>');

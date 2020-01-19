@@ -143,7 +143,6 @@ C:/Users/Ethan Weber/source/repos/Cornhacks2020/CornhacksProject/obj/Debug/Cornh
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/bin/Newtonsoft.Json.xml
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/bin/Antlr3.Runtime.pdb
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-/Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/obj/Debug/CornhacksProject.csprojAssemblyReference.cache
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/obj/Debug/CornhacksProject.csproj.CopyComplete
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/obj/Debug/CornhacksProject.dll
 /Users/alexlinneman/Projects/Cornhacks2020/CornhacksProject/obj/Debug/CornhacksProject.pdb

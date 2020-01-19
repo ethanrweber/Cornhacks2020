@@ -20,6 +20,28 @@
 *.cache
 
 
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+/CornhacksProject/bin
+/CornhacksProject/obj
+/CornhacksProject/.vs
+/.vs
+*.ide
+*.suo
+*.dll
+*.pdb
+*.lock
+*.exe
+*.sqlite
+*.xml
+*.ide-wal
+*.ide-shm
+*.testlog
+*.manifest
+*.cache
+
+
 
 ###################
 # compiled source #

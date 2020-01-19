@@ -128,7 +128,7 @@ namespace CornhacksProject.Controllers
 
             // air quality score based on us official air quality index rankings 
             int airScore;
-            if (airQuality <= 50) airScore = 6;
+            if (airQuality <= 25) airScore = 6;
             else if (airQuality <= 100) airScore = 5;
             else if (airQuality <= 200) airScore = 4;
             else if (airQuality <= 300) airScore = 3;
@@ -137,8 +137,8 @@ namespace CornhacksProject.Controllers
             else throw new Exception("api error: value not in expected range");
 
             int finalScore = 10;
-            if (airScore < 6) finalScore -= (int) ((7 - airScore) / 1.5); // deductions for poor air quality 
-            if (energyScore > 2) finalScore -=(int) ((energyScore + 1) / 1.5); // unsure of good metric to deduct points for energy score
+            if (airScore < 6) finalScore -= (int) ((7 - airScore)); // deductions for poor air quality 
+            if (energyScore > 2) finalScore -=(int) ((energyScore + 1)); // unsure of good metric to deduct points for energy score
 
             if (EVStationScoreBonus > .0001) finalScore++; // bonus point for ev chargers: approximate avg # evc / population = .1 / 1000 = .0001
             

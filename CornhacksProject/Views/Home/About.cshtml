@@ -1,8 +1,22 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h1>@ViewBag.Title</h1>
+<h3>Data-Fueled Sustainability Scoring</h3>
 
-<p>Use this area to provide additional information.</p>
+<p>
+    Using public API data on cities, we developed a sustainability scoring system based on a cities resources, current state, energy consumption.
+    Metrics on air quality, number of electric vehicle charging stations available, and total gas and electric consumption (industrial, commercial,
+    and residential) all contribute to a city's score. Air quality quantifies the state of the city currently, and energy consuption and total
+    number of electric vehicle charging stations suggest a quantification of the cities sustainable future. Calculations are made on a per capita
+    basis by calling a population API.
+</p>
+
+<div class="row" style="font-size: 1.2em;">
+    <ul>
+        <li><span class="glyphicon glyphicon-ok-circle" style="color: green;">&nbsp;## - Above Average (Score of 8 or higher)</span></li>
+        <li><span class="glyphicon glyphicon-ok-sign" style="color: #369CEF;">&nbsp;## - Average (Score of 6-7)</span></li>
+        <li><span class="glyphicon glyphicon-ban-circle" style="color: red;">&nbsp;## - Below Average (Score of 5 or lower)</span></li>
+    </ul>
+</div>
 <p>@ViewBag.SScore</p>

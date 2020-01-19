@@ -3,7 +3,7 @@
 ################################################################################
 /CornhacksProject/bin
 /CornhacksProject/obj
-/CornhacksProject/.vs/CornhacksProject/v16/Server/sqlite3
+/CornhacksProject/.vs
 *.ide
 *.suo
 *.dll
@@ -14,3 +14,6 @@
 *.xml
 *.ide-wal
 *.ide-shm
+*.testlog
+*.manifest
+*.cache

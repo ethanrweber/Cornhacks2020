@@ -53,7 +53,7 @@ namespace CornhacksProject.Controllers
             //testing
             if (string.IsNullOrWhiteSpace(city))
                 throw new Exception("city is a required field");
-                city = "city=" + city;
+            city = "city=" + city;
             if (!string.IsNullOrWhiteSpace(state))
             {
                 string stateAbrev = "";
@@ -83,7 +83,7 @@ namespace CornhacksProject.Controllers
             string query = "";
             if (string.IsNullOrWhiteSpace(city))
                 throw new Exception("city is a required field");
-                query = "q=" + city;
+            query = "q=" + city;
             if (!string.IsNullOrWhiteSpace(state))
             {
                 string stateAbrev = "";

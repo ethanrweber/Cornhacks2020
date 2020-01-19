@@ -20,7 +20,7 @@ namespace CornhacksProject.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-            var z = SustainabilityScore("Burlington", "Vermont", "USA");
+            var z = SustainabilityScore("Lincoln", "Nebraska", "USA");
             return View();
         }
 
@@ -48,6 +48,33 @@ namespace CornhacksProject.Controllers
                 return x;
             }
         }
+
+        public async Task<List<OpenChargeResult>> GetOpenChargeResultAsync(double latitude, double longitude, double distance = 20, string distanceUnit = "Miles")
+        {
+            using (var client = new HttpClient())
+            {
+                string addy = $"https://api.openchargemap.io/v3/poi/?output=json&compact=true&verbose=false&countrycode=US&latitude={latitude}&longitude={longitude}&distance={distance}&distanceunit={distanceUnit}";
+                var response = client.GetStringAsync(new Uri(addy)).Result;
+                var x = JsonConvert.DeserializeObject<List<OpenChargeResult>>(response);
+
+                return x;
+            }
+        }
+
+        public int GetNumEVStations(List<OpenChargeResult> list, string city)
+        {
+            int numStations = 0;
+            foreach (var v in list)
+            {
+                if (v.AddressInfo.Town == city)
+                {
+                    numStations++;
+                }
+            }
+
+            return numStations;
+        }
+
         public async Task<EnergyConsumption> GetEnergyConsumptionsResultsAsync(string city, string state, string country)
         {
             //testing
@@ -107,24 +134,29 @@ namespace CornhacksProject.Controllers
 
         public double SustainabilityScore(string city, string state, string country)
         {
-            var population = GetPopulationAsync(city, state, country).Result.records.FirstOrDefault().fields.population;
+            var p = GetPopulationAsync(city, state, country).Result;
+            List<double> coordinates = p.records[0].geometry.coordinates;
+            var z = GetOpenChargeResultAsync(coordinates[1], coordinates[0]).Result;
+            int numEVStations = GetNumEVStations(z, city);
+
+            int population = p.records.FirstOrDefault().fields.population;
 
 
             var energyStats = GetEnergyConsumptionsResultsAsync(city, state, country).Result;
-            var industrialGasUse = energyStats.table.industrial_gas_use.avg;
-            var industrialElectricUse = energyStats.table.industrial_electric_use.avg;
-            var commercialGasUse = energyStats.table.commercial_gas_use.avg;
-            var commercialElectricUse = energyStats.table.commercial_electric_use.avg;
-            var residentialGasUse = energyStats.table.residential_gas_use.avg;
-            var residentialElectricUse = energyStats.table.residential_electric_use.avg;
-            var cityGasUse = energyStats.table.city_fuel_use_gas.avg;
+            int industrialGasUse = energyStats.table.industrial_gas_use.avg;
+            int industrialElectricUse = energyStats.table.industrial_electric_use.avg;
+            int commercialGasUse = energyStats.table.commercial_gas_use.avg;
+            int commercialElectricUse = energyStats.table.commercial_electric_use.avg;
+            int residentialGasUse = energyStats.table.residential_gas_use.avg;
+            int residentialElectricUse = energyStats.table.residential_electric_use.avg;
+            int cityGasUse = energyStats.table.city_fuel_use_gas.avg;
 
             var airResult = GetAirVisualResultAsync(city, state, country).Result;
             //the lower, the better:
-            var airQuality = airResult.data.current.pollution.aqius;
+            int airQuality = airResult.data.current.pollution.aqius;
 
-            double energyScore = (industrialElectricUse + industrialGasUse + commercialGasUse + commercialElectricUse + residentialElectricUse + residentialGasUse + cityGasUse) / population;
-            double airScore = airQuality / population;
+            double energyScore = (double) (industrialElectricUse + industrialGasUse + commercialGasUse + commercialElectricUse + residentialElectricUse + residentialGasUse + cityGasUse) / population;
+            double airScore = (double) airQuality / population;
 
             //TODO: figure out a better system for scores
             var finalScore = energyScore * 0.25 + airQuality * 0.75;

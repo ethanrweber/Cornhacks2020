@@ -125,8 +125,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AirVisualResult.cs" />
+    <Compile Include="Models\CityPopulation.cs" />
     <Compile Include="Models\Constants.cs" />
-    <Compile Include="Models\PopulationResult.cs" />
+    <Compile Include="Models\EnergyConsumption.cs" />
+    <Compile Include="Models\OpenChargeResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +166,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\References.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

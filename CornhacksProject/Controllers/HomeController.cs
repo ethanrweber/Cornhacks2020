@@ -20,7 +20,8 @@ namespace CornhacksProject.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-            var x = GetAirVisualResultAsync("", "", "").Result;
+            var x = GetOpenChargeResultAsync(0, 0).Result;
+            
             return View();
         }
 
@@ -45,6 +46,22 @@ namespace CornhacksProject.Controllers
                 var response = client.GetStringAsync(new Uri(addy)).Result;
                 var x = JsonConvert.DeserializeObject<AirVisualResult>(response);
                 return response;
+            }
+        }
+
+        public async Task<List<OpenChargeResult>> GetOpenChargeResultAsync(double latitude, double longitude, double distance = 10, string distanceUnit = "Miles", int maxResults = 2)
+        {
+            //testing
+            latitude = 40.8136;
+            longitude = -96.7026;
+
+            using (var client = new HttpClient())
+            {
+                string addy = $"https://api.openchargemap.io/v3/poi/?output=json&compact=true&verbose=false&countrycode=US&maxresults={maxResults}&latitude={latitude}&longitude={longitude}&distance={distance}&distanceunit={distanceUnit}";
+                var response = client.GetStringAsync(new Uri(addy)).Result;
+                var x = JsonConvert.DeserializeObject<List<OpenChargeResult>>(response);
+                
+                return x;
             }
         }
     }

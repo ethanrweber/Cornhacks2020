@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="Models\AirVisualResult.cs" />
     <Compile Include="Models\Constants.cs" />
+    <Compile Include="Models\OpenChargeResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

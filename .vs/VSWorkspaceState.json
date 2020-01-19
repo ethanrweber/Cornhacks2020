@@ -2,12 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\CornhacksProject",
-    "\\CornhacksProject\\App_Data",
-    "\\CornhacksProject\\bin",
     "\\CornhacksProject\\bin\\roslyn",
-    "\\CornhacksProject\\obj",
-    "\\CornhacksProject\\obj\\Debug"
+    "\\CornhacksProject\\Models",
+    "\\CornhacksProject\\obj\\Debug",
+    "\\CornhacksProject\\Views",
+    "\\CornhacksProject\\Views\\Home",
+    "\\CornhacksProject\\Views\\Shared"
   ],
-  "SelectedNode": "\\CornhacksProject",
+  "SelectedNode": "\\CornhacksProject\\Views",
   "PreviewInSolutionExplorer": false
 }

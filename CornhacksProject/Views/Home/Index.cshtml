@@ -10,8 +10,10 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4 center-block" >
+    <div class="col-md-4" >
         <h2>Map</h2>
+        <input type="search" id="searchBox" placeholder="Search for a city" class="form-control"/>
+        <br/>
         <div id="map"  style="display: block;"></div>
     </div>
 </div>
@@ -25,19 +27,29 @@
     </script>
     <script type="text/javascript">
 
+        // script that runs when the page finishes loading
         $(document).ready(function () {
+            // defer execution slightly to finish getting map api js
+            setTimeout(initMap(), 300);
 
-            initMap();
-
-            function initMap() {
-                var uluru = { lat: -25.344, lng: 131.036 };
-                var map = new google.maps.Map(
-                    document.getElementById('map'),
-                    { zoom: 4, center: uluru }
-                );
-                var marker = new google.maps.Marker({ position: uluru, map: map });
-            }
+            $('#searchBox').submit(function(event) {
+                event.preventDefault();
+                var requrest = {
+                    query: $('#searchBox').val(),
+                    fields: ['name']
+                }
+                google.maps.places.
+            });
         });
+
+        function initMap() {
+            var birthplace = { lat: 40.816303, lng: -96.702351 };
+            var map = new google.maps.Map(
+                document.getElementById('map'),
+                { zoom: 18, center: birthplace }
+            );
+            var marker = new google.maps.Marker({ position: birthplace, map: map });
+        }
 
     </script>
 }
